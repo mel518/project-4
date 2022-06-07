@@ -12,34 +12,15 @@ app = Flask(__name__)
 CORS(app)
 
 # Use PyMongo to establish Mongo connection
-mongo = PyMongo(app, uri="mongodb://localhost:27017/project3")
+mongo = PyMongo(app, uri="mongodb://localhost:27017/Project4")
 
-@app.route("/")
-def homepage():
-    data = mongo.db.wines.find({},{'_id': 0,'taster_name':0,'taster_twitter_handle':0,'designation':0,'region_1':0,'region_2':0}).limit(5000)
+
+@app.route("/fighters")
+def fighters():
+    data = mongo.db.fighters.find({},{'_id':False})
     list_cur = list(data)
-    json_data = jsonify(json_util.dumps(list_cur))
-    return json_data
-
-@app.route("/variety-list")
-def variety_list():
-    data = mongo.db.wines.distinct('variety')
-    list_cur = list(data)
-    return jsonify(list_cur)
-
-@app.route("/select/<variety>")
-def select(variety):
-    data = mongo.db.wines.find({'variety':variety},{'_id': 0,'taster_name':0,'taster_twitter_handle':0,'designation':0,'region_1':0,'region_2':0})
-    list_cur = list(data)
-    return jsonify(list_cur)
-
-@app.route("/coords")
-def coords():
-    data = mongo.db.merged.find()
-    list_cur = list(data)
-    json_data = jsonify(json_util.dumps(list_cur))
-    return json_data
-
+    
+    return jsonify(list_cur[0]["fighter_dropdown"])
 
 
 if __name__ == '__main__':
