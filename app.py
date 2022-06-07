@@ -17,7 +17,7 @@ mongo = PyMongo(app, uri="mongodb+srv://mel518:databasepass@TestTrain.ppavz.mong
 
 @app.route("/")
 def home():
-    data = mongo.db.Data.find().limit(100)
+    data = mongo.db.Data.find()
     list_cur = list(data)
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
