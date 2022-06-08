@@ -22,5 +22,14 @@ def home():
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
 
+@app.route("/fighters")
+def fighters():
+    data = mongo.db.fighters.find({},{'_id':False})
+    list_cur = list(data)
+    
+    return jsonify(list_cur[0]["fighter_dropdown"])
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
