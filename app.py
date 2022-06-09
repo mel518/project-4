@@ -29,6 +29,14 @@ def fighters():
     
     return jsonify(list_cur[0]["fighter_dropdown"])
 
+@app.route("/combined")
+def combined():
+    data = mongo.db.Combined_Fighter.find()
+    list_cur = list(data)
+    json_data = jsonify(json_util.dumps(list_cur))
+    return json_data
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
