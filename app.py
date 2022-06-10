@@ -7,6 +7,11 @@ from matplotlib import projections
 from bson import json_util
 from flask_cors import CORS
 import sys
+import numpy as np
+import os
+import time
+from flask import Flask, request, jsonify, render_template
+import joblib
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -14,8 +19,13 @@ CORS(app)
 
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb+srv://mel518:databasepass@TestTrain.ppavz.mongodb.net/Project4?retryWrites=true&w=majority")
+model = joblib.load('fighter_classifier.h5')
 
-@app.route("/")
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route("/Data")
 def home():
     data = mongo.db.Data.find()
     list_cur = list(data)
