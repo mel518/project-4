@@ -1,18 +1,25 @@
 function init(sample) {
-    d3.json(`http://127.0.0.1:5000/select/${sample}`).then(data => {
+    d3.json(`https://ufcmatchdata.herokuapp.com/fighter_stats`).then(data => {
         console.log('top data')
         console.log(data)
 
     let result = data;
     console.log(result)
 
-    let meta = [];
+    // read the data through JSON.parse()
     fighters = JSON.parse(result);
     console.log(fighters)
 
+    // sort the data by date
+    // let mxDate = fighters.sort(function(a,b) {
+    //     return a > b ? a : b;
+    // });
+    // console.log(mxDate)
+
+    // display the data
     let displayinfo = d3.select('#selDataset');
     displayinfo.html('');
-    fighters.forEach(k => {
+    Object.entries(fighters[0]).forEach(k => {
         console.log(k)
         displayinfo.append('option').text(k[0] + ':' + k[1]).append('br')
     });
