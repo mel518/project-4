@@ -30,5 +30,20 @@ def fighters():
     return jsonify(list_cur[0]["fighter_dropdown"])
 
 
+@app.route("/combined")
+def combined():
+    data = mongo.db.Combined_Fighter.find()
+    list_cur = list(data)
+    json_data = jsonify(json_util.dumps(list_cur))
+    return json_data
+
+
+@app.route("/combined/<fighter>")
+def select(fighter):
+    data =mongo.db.Combined_Fighter.find({'fighter':fighter},{'_id': 0,'date': 1,'avg_KD':1,'avg_TOTAL_STatt':1,'avg_TOTAL_STlanded':1})
+    list_cur = list(data)
+    return jsonify(list_cur)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

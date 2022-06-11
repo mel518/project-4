@@ -1,32 +1,38 @@
-// function scatterpoints(sample){
-  d3.json('https://ufcmatchdata.herokuapp.com/combined').then(async data => {
+// 'https://ufcmatchdata.herokuapp.com/recent_matches'
+// 'https://ufcmatchdata.herokuapp.com/combined/${fighter}'
+function visuals(sample){
+  d3.json('https://ufcmatchdata.herokuapp.com/recent_matches').then(async data => {
     var combined_data = JSON.parse(data)
     console.log(combined_data[1].avg_BODY_att);
     console.log('nii')
     
        
-  
+        let dte= [];
         let KD= [];
         let total_strike= [];
-        let winename= [];
+        let total_strike_lnd= [];
   
         for(var i = 0; i<combined_data.length; i++) {
-          combined_data[i].Referee
-          KD.push(combined_data[i].Referee);
+          combined_data[i].avg_KD
+          KD.push(combined_data[i].avg_KD);
         }
         console.log(KD);
   
-        // for(var i = 0; i<combined_data.length; i++) {
-        //   combined_data[i].avg_KD
-        //   total_strike.push(resultArray[i].avg_KD);
-        // }
+        for(var i = 0; i<combined_data.length; i++) {
+          combined_data[i].avg_TOTAL_STatt
+          total_strike.push(combined_data[i].avg_TOTAL_STatt);
+        }
   
-        // for(var i = 0; i<resultArray.length; i++) {
-        //   resultArray[i].price
-        //   winename.push(resultArray[i].title);
-        // }
+        for(var i = 0; i<combined_data.length; i++) {
+          combined_data[i].date
+          dte.push(combined_data[i].date);
+        }
         
-      //   console.log(winename);
+        for(var i = 0; i<combined_data.length; i++) {
+          combined_data[i].avg_TOTAL_STlanded
+          total_strike_lnd.push(combined_data[i].avg_TOTAL_STlanded);
+        }
+         console.log(total_strike);
   
   
       //   let trace2 = {
@@ -83,6 +89,14 @@
   
   
     });
+  }
+
+
+  // function optionChanged(sample) {
+  //   console.log(sample);
+  //   init(sample);
+  //   init1(sample);
+  //   
   // }
 
-  // scatterpoints();
+  visuals();
