@@ -43,7 +43,7 @@ def predict():
                               )
 
 @app.route("/Data")
-def home():
+def home2():
     data = mongo.db.Data.find()
     list_cur = list(data)
     json_data = jsonify(json_util.dumps(list_cur))
@@ -59,6 +59,13 @@ def fighters():
 @app.route("/combined")
 def combined():
     data = mongo.db.Combined_Fighter.find()
+    list_cur = list(data)
+    json_data = jsonify(json_util.dumps(list_cur))
+    return json_data
+
+@app.route("/fighter_stats")
+def combined():
+    data = mongo.db.fighter_stats.find()
     list_cur = list(data)
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
