@@ -24,28 +24,13 @@ function init(sample) {
         displayinfo.append('option').text(k[0] + ':' + k[1]).append('br')
     });
 
-
-
-
-
-    // if () {
-    //     let displayinfo = d3.select('#sample-metadata2');
-    //     displayinfo.html('');
-    //     Object.entries(meta[0]).forEach(k => {
-    //         console.log(k)
-    //         displayinfo.append('panel-body').text(k[0].toUpperCase() + ': ' + k[1]).append('br');
-    //     });
-    //     //display the second top option
-    //     let displayinfo2 = d3.select('#sample-metadata3');
-    //     displayinfo2.html('');
-    //     Object.entries(meta[1]).forEach(k2 => {
-    //         console.log(k2)
-    //         displayinfo2.append('panel-body').text(k2[0].toUpperCase() + ':' + k2[1]).append('br');
-    //     });
-    // }
-
-
-
+    // display the data
+    let displayinfo2 = d3.select('#selDataset1');
+    displayinfo.html('');
+    Object.entries(fighters[0]).forEach(k => {
+        console.log(k)
+        displayinfo2.append('option').text(k[0] + ':' + k[1]).append('br')
+    });
 
     });
 

@@ -28,14 +28,13 @@ def home():
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
 
-
-@app.route("/stats")
+@app.route("/fighter_stats")
 def stats():
     data = mongo.db.fighter_stats.find({}, {'_id': 0})
     list_cur = list(data)
     return jsonify(list_cur)
 
-@app.route("/stats/<fighter>")
+@app.route("/fighter_stats/<fighter>")
 def fighter(player):
     data =mongo.db.fighter_stats.find({'fighter':player},{'date': 0, 'avg_KD': 0, 'win_by_Decision_Majority': 0})
     list_cur = list(data)
