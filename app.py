@@ -19,7 +19,7 @@ CORS(app)
 
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb+srv://mel518:databasepass@TestTrain.ppavz.mongodb.net/Project4?retryWrites=true&w=majority")
-model = joblib.load('fighter_classifier.h5')
+#model = joblib.load('fighter_classifier.h5')
 
 # @app.route('/')
 # def home():
@@ -43,7 +43,7 @@ model = joblib.load('fighter_classifier.h5')
 #                               )
 
 @app.route("/")
-def home2():
+def home():
     data = mongo.db.Data.find()
     list_cur = list(data)
     json_data = jsonify(json_util.dumps(list_cur))
