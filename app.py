@@ -21,28 +21,28 @@ CORS(app)
 mongo = PyMongo(app, uri="mongodb+srv://mel518:databasepass@TestTrain.ppavz.mongodb.net/Project4?retryWrites=true&w=majority")
 model = joblib.load('fighter_classifier.h5')
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
-@app.route('/predict',methods=['POST','GET'])
-def predict():
+# @app.route('/predict',methods=['POST','GET'])
+# def predict():
 
-    int_features = [float(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
+#     int_features = [float(x) for x in request.form.values()]
+#     final_features = [np.array(int_features)]
+#     prediction = model.predict(final_features)
 
-    # output = round(prediction[0], 2)
-    if prediction==0:
-        return render_template('index.html',
-                               prediction_text='Low chances of patient readmitted to hospital.'.format(prediction),
-                               )
-    else:
-        return render_template('index.html',
-                               prediction_text='High chances of patient readmitted to hospital'.format(prediction),
-                              )
+#     # output = round(prediction[0], 2)
+#     if prediction==0:
+#         return render_template('index.html',
+#                                prediction_text='Low chances of patient readmitted to hospital.'.format(prediction),
+#                                )
+#     else:
+#         return render_template('index.html',
+#                                prediction_text='High chances of patient readmitted to hospital'.format(prediction),
+#                               )
 
-@app.route("/Data")
+@app.route("/")
 def home2():
     data = mongo.db.Data.find()
     list_cur = list(data)
@@ -64,7 +64,7 @@ def combined():
     return json_data
 
 @app.route("/fighter_stats")
-def combined():
+def fighter():
     data = mongo.db.fighter_stats.find()
     list_cur = list(data)
     json_data = jsonify(json_util.dumps(list_cur))
