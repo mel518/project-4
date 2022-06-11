@@ -63,12 +63,23 @@ def combined():
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
 
-@app.route("/fighter_stats")
-def fighter():
-    data = mongo.db.fighter_stats.find()
+@app.route("/combined/<fighter>")
+def select(fighter):
+    data =mongo.db.Combined_Fighter.find({'fighter':fighter},{'_id': 0,'date': 1,'avg_KD':1,'avg_TOTAL_STatt':1,'avg_TOTAL_STlanded':1})
     list_cur = list(data)
-    json_data = jsonify(json_util.dumps(list_cur))
-    return json_data
+    return jsonify(list_cur)
+
+@app.route("/fighter_stats")
+def stats():
+    data = mongo.db.fighter_stats.find({}, {'_id': 0})
+    list_cur = list(data)
+    return jsonify(list_cur)
+
+@app.route("/fighter_stats/<fighter>")
+def fighter(player):
+    data =mongo.db.fighter_stats.find({'fighter':player},{'date': 0, 'avg_KD': 0, 'win_by_Decision_Majority': 0})
+    list_cur = list(data)
+    return jsonify(list_cur)
 
 @app.route("/recent_matches")
 def recent():
