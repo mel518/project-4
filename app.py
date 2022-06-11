@@ -71,13 +71,13 @@ def select(fighter):
 
 @app.route("/fighter_stats")
 def stats():
-    data = mongo.db.fighter_stats.find({}, {'_id': 0})
+    data = mongo.db.recent_matches.find({}, {'_id': 0})
     list_cur = list(data)
     return jsonify(list_cur)
 
 @app.route("/fighter_stats/<fighter>")
 def fighter(player):
-    data =mongo.db.fighter_stats.find({'fighter':player},{'date': 0, 'avg_KD': 0, 'win_by_Decision_Majority': 0})
+    data =mongo.db.recent_matches.find({'fighter':player},{'date': 0, 'avg_KD': 0, 'win_by_Decision_Majority': 0})
     list_cur = list(data)
     return jsonify(list_cur)
 
