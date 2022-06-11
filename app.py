@@ -70,6 +70,13 @@ def fighter():
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
 
+@app.route("/recent_matches")
+def recent():
+    data = mongo.db.recent_matches.find()
+    list_cur = list(data)
+    json_data = jsonify(json_util.dumps(list_cur))
+    return json_data
+
 
 
 if __name__ == '__main__':
