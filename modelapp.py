@@ -8,10 +8,12 @@ from bson import json_util
 from flask_cors import CORS
 import sys
 import numpy as np
+import pandas as pd
 import os
 import time
 from flask import Flask, request, jsonify, render_template
 import joblib
+from sklearn.metrics import accuracy_score
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -27,13 +29,25 @@ def index():
     
 @app.route('/predict', methods = ['POST', 'GET'])
 def predict():
-    print(request.form)
-    
-# fighter1(fighter1):
-#     data1 = mongo.db.recent_matches.find({'fighter':fighter1})
+    print(request.form.values())
+    fighter1 = mongo.db.recent_matches.find({'fighter':request.form.values[0]})
+    fighter2 = mongo.db.recent_matches.find({'fighter':request.form.values[1]})
+    df1 = pd.DataFrame(fighter1)
+    df2 = pd.DataFrame(fighter2)
+    df1.drop(columns = 'fighter', inplace = True)
+    df2.drop(columns = 'fighter', inplace = True)
+    df1.append(df2)
+    df1_formodel = pd.get_dummies(df1)
 
-# def fighter2(fighter2):
-#     data2 = mongo.db.recent_matches.find({'fighter':fighter2})
+    prediction = model.predict(df1_formodel)
+    accuracy = model.score(df1_formodel)
+
+    if prediction==0:
+        return render_template('index.html',prediction_text='Fighter 1 Wins'.format(accuracy))
+    else:
+       return render_template('index.html',prediction_text='Fighter 2 Wins'.format(accuracy))
+
+predict()
 
 
 
@@ -43,16 +57,7 @@ def predict():
 
 #     int_features = [float(x) for x in request.form.values()]
 #     final_features = [np.array(int_features)]
-#     prediction = model.predict(final_features)
-
-#     # output = round(prediction[0], 2)
-#     if prediction==0:
-#         return render_template('index.html',
-#                                prediction_text='Low chances of patient readmitted to hospital.'.format(prediction),
-#                                )
-#     else:
-#         return render_template('index.html',
-#                                prediction_text='High chances of patient readmitted to hospital'.format(prediction),
+#     
 #         
 if __name__ == '__main__':
     app.run(debug=True)

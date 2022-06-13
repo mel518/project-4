@@ -101,6 +101,7 @@
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                           </a>
                         </div>
+                    <!-- form starts to collect user selection -->
                     <form action='/predict' method="POST" class = "col-sm-6">
                         <div class="card-body">
                           <select id="selDataset" onchange="optionChanged(this.value)"></select>    
@@ -133,6 +134,7 @@
                         </div>
                       </div>
                     </form>
+                    <br><h4 align = 'center'<b>{{prediction_text}}</b></h4>
                     </div>
                 </div>
 
