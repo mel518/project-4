@@ -6,7 +6,6 @@ async function predict() {
   const fighter2 = fighter2_el?.value
   
 
-
     const rawResponse = await fetch('http://127.0.0.1:5000/predict', {
       method: 'POST',
       headers: {
