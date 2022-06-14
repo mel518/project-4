@@ -1,4 +1,30 @@
+async function predict() {
+  const fighter1_el = document.getElementById("selDataset")
+  const fighter2_el = document.querySelector("#selDataset1")
+  console.log(fighter2_el)
+  const fighter1 = fighter1_el?.value
+  const fighter2 = fighter2_el?.value
+  
 
+
+    const rawResponse = await fetch('http://127.0.0.1:5000/predict', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fighter1,
+        fighter2
+    })
+    });
+    const content = await rawResponse.json();
+  
+    console.log(content);
+    const results = document.getElementById("results")
+    results.innerHTML = content.prediction
+ 
+}
 
 function init() {
   d3.json("https://ufcmatchdata.herokuapp.com/fighters").then(data => {
