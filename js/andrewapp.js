@@ -26,7 +26,7 @@ async function predict() {
 }
 
 function init() {
-  d3.json("https://ufcmatchdata.herokuapp.com/fighters").then(data => {
+  d3.json("http://127.0.0.1:5000/fighters").then(data => {
     // Drop down menu creation
     let dropdownMenu = d3.select("#selDataset");
     data.forEach((uniqueVarietyList) => {
@@ -53,7 +53,7 @@ function fighter1() {
 
   const fighter1 = d3.select("#selDataset").node().value;
 
-  d3.json(`https://ufcmatchdata.herokuapp.com/ufc`).then(data => {
+  d3.json(`http://127.0.0.1:5000//ufc`).then(data => {
     data = JSON.parse(data)
     console.log(data)
     playerwebsite = data.filter(player => player.fighters === fighter1)[0]?.webpage
@@ -71,7 +71,7 @@ function fighter2() {
 
   const fighter2 = d3.select("#selDataset1").node().value;
 
-  d3.json(`https://ufcmatchdata.herokuapp.com/ufc`).then(data => {
+  d3.json(`http://127.0.0.1:5000/ufc`).then(data => {
     data = JSON.parse(data)
     console.log(data)
     playerwebsite = data.filter(player => player.fighters === fighter2)[0]?.webpage
