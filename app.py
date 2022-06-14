@@ -14,6 +14,7 @@ import time
 from flask import Flask, request, jsonify, render_template
 import joblib
 from sklearn.metrics import accuracy_score
+import simplejson
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -76,17 +77,11 @@ def combined():
 def select(fighter):
     data =mongo.db.Combined_Fighter.find({'fighter':fighter},{'_id': 0,'date': 1,'avg_KD':1,'avg_TOTAL_STatt':1,'avg_TOTAL_STlanded':1})
     list_cur = list(data)
-    return jsonify(list_cur)
+    return simplejson.dumps(list_cur, ignore_nan=True)
 
 @app.route("/fighter_stats")
 def stats():
     data = mongo.db.recent_matches.find({}, {'_id': 0})
-    list_cur = list(data)
-    return jsonify(list_cur)
-
-@app.route("/fighter_stats/<fighter>")
-def fighter(player):
-    data =mongo.db.recent_matches.find({'fighter':player},{'date': 0, 'avg_KD': 0, 'win_by_Decision_Majority': 0})
     list_cur = list(data)
     return jsonify(list_cur)
 
@@ -108,3 +103,5 @@ def ufc():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
