@@ -29,6 +29,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Athlete Stats</a></li> <!-- originally Portfolio-->
+                        <li class="nav-item"><a class="nav-link" href="#ranking">Ranking</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -90,7 +91,7 @@
                 <div class="text-center">
 
                     <h2 class="section-heading text-uppercase">Athlete Stats</h2> <!-- originally Portfolio-->
-                    <h3 class="section-subheading text-muted">Pick two athletes to see their individual stats, and ---IDK WHAT TO WRITE-- and who is most likely to get their ass beat.</h3>
+                    <h3 class="section-subheading text-muted">Pick two athletes to get their stats, and a statiscal model that predicts who would win through previous fight stats.</h3>
                 </div>
 
                 <div class="row">
@@ -103,8 +104,6 @@
                           </a>
                         </div>
                         <div class="card-body">   
-                            <!-- FORM STARTS -->
-                        <form action="{{url_for('predict')}}" method="post">
                           <h5 class="card-title">Red Corner</h5>
                           <select id="selDataset" onchange="optionChanged(this.value)"></select> 
                           <br/><br/>
@@ -126,8 +125,7 @@
                         </div>
                         <div class="card-body">
                           <h5 class="card-title">Blue Corner</h5>
-                          <select id="selDataset1" onchange="optionChanged(this.value)">
-                        </form></select>
+                          <select id="selDataset1" onchange="optionChanged(this.value)"></select>
                           <br/><br/>
                           <p class="card-text">With supporting text below as a natural lead-in to additional content.
                           <div id="sample-metadata3" class="panel-body"></div>
@@ -136,6 +134,10 @@
                           <!-- <a href="#" class="btn btn-primary">Athlete UFC Page Stats</a> -->
                         </div>
                       </div>
+                    </div>
+                    <div>
+                        <button onclick="predict()" class="btn btn-primary"> Predict </button>
+                        <p id="results"></p>
                     </div>
                 </div>
 
@@ -152,8 +154,8 @@
 
                 <div class="text-center">
                     <br/><br/>
-                    <h2 class="section-heading text-uppercase">RANKINGS</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase" id="ranking">RANKING</h2>
+                    <h3 class="section-subheading text-muted">Current UFC Champion title holders. (Last updated 6/15/2022)</h3>
                 </div>
                   
 
@@ -256,7 +258,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Where we got the data / Classifications / Data Modeling / Analysis</h3>
+                    <h3 class="section-subheading text-muted">Details of our steps from start to finish!</h3>
                 </div>
                 <ul class="timeline">
                     <li>
@@ -276,7 +278,7 @@
                                 <h4>Step 2</h4>
                                 <h4 class="subheading">Data Optimization</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">ETL process included data clean up, web scraping, bringing in latest fight stats, appending / removing irrelevent columns, reformating data for model creation.</p></div>
                         </div>
                     </li>
                     <li>
@@ -286,7 +288,7 @@
                                 <h4>Step 3</h4>
                                 <h4 class="subheading">Data Modeling</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">A test train model was used to classify previous fight data stats in order to predict probablistic outcomes.</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -296,7 +298,7 @@
                                 <h4>Step 4</h4>
                                 <h4 class="subheading">Execution</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">Through the use of Atlas Mongo and Heroku, we were able to create a server to visual the website and databases for our viewers.</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -318,7 +320,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">MEET THE TEAM!</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted"></h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -326,7 +328,7 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/ryan.jpg" alt="..." />
                             <h4>Ryan Tempone</h4>
                             <p class="text-muted">Retired UFC Fighter</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Ryanvt94" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
@@ -336,9 +338,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/ellen.jpg" alt="..." />
                             <h4>Ellen White</h4>
                             <p class="text-muted">Lead Mongo Guru</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/mel518" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/ellen-white-680a9519a/" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -346,9 +348,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/nii.jpg" alt="..." />
                             <h4>Immanuel Odateifio</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Nii-O" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/immanuel-odarteifio/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -356,9 +358,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/andrew.jpg" alt="..." />
                             <h4>Andrew Kim</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Adkim0321" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/andrew-analytics/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -366,9 +368,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/lizzy.jpg" alt="..." />
                             <h4>Lizzy Nguyen</h4>
                             <p class="text-muted">Web Manager</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/SimplyLizzy" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/elingu/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -376,9 +378,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/Mo.jpg" alt="..." />
                             <h4>Mohamed Hamza</h4>
                             <p class="text-muted">Honorary Member</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/mohamed-s-hamza/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
@@ -546,6 +548,9 @@
                                             <strong>Fighting Style:</strong>
                                             Freestyle
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
@@ -615,6 +620,9 @@
                                             <strong>Fighting Style:</strong>
                                             Boxing
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
@@ -684,6 +692,9 @@
                                             <strong>Fighting Style:</strong>
                                             Kickboxer
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
@@ -749,6 +760,9 @@
                                             <strong>Fighting Style:</strong>
                                             Muay Thai
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
@@ -814,6 +828,9 @@
                                             <strong>Fighting Style:</strong>
                                             Muay Thai
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
@@ -882,6 +899,9 @@
                                             <strong>Fighting Style:</strong>
                                             Jiu Jitsu
                                         </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li>   
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
