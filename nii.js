@@ -1,12 +1,34 @@
 // 'https://ufcmatchdata.herokuapp.com/recent_matches'
 // 'https://ufcmatchdata.herokuapp.com/combined/${fighter}'
-function visuals(sample){
-  d3.json('https://ufcmatchdata.herokuapp.com/recent_matches').then(async data => {
-    var combined_data = JSON.parse(data)
-    console.log(combined_data[1].avg_BODY_att);
-    console.log('nii')
+
+// function visuals1() {
+
+//   const visuals1 = d3.select("#selDataset").node().value;
+
+//   d3.json(`https://ufcmatchdata.herokuapp.com/recent_matches`).then(data => {
+//     data = JSON.parse(data)
+//     console.log(data)
+//     playerwebsite = data.filter(player => player.fighters === visuals1)[0]?
     
-       
+//     // add listner (this is in the html)
+//     // window.open(data[0].webpage, "_blank");
+//   })}
+
+d3.select("#selDataset").on('change',function(){
+  const value = d3.select(this).value
+  visuals(value)
+})
+
+ function visuals(fighter){
+  //const visuals = d3.select("#selDataset").node().value;
+  console.log('fighter' , fighter)
+  d3.json(`http://127.0.0.1:5000/combined/${fighter}`).then( data => {
+    // var combined_data = JSON.parse(data)
+    let combined_data=data;
+    console.log(data);
+    console.log()
+    //playerwebsite = data.filter(player => player.fighters === visuals)[0]
+        
         let dte= [];
         let KD= [];
         let total_strike= [];
@@ -63,29 +85,29 @@ function visuals(sample){
   
         
   
-      //   var data = [
-      //     {
-      //       x: winepoints,
-      //       y: wineprice.length,
-      //       type: 'histogram',
-      //     marker: {
-      //       color: '#C70039',
-      //       line: {
-      //         color:  "rgba(255, 100, 102, 1)",
-      //         width: 1
-      //       }
-      //     },
-      //     }
-      //   ];
-      //   let barLayout= {
-      //     title: 'Histogram of Wine Rating',
-      //     margin: {t:0},
-      //     hovermode: "closest",
-      //     xaxis: {title: 'Wine Ratings'},
-      //     yaxis: {title:'# of wines'},
-      //     margin: {t:30}
-      //   };
-      //   Plotly.newPlot('bar', data,barLayout);
+        var data = [
+          {
+            x: dte,
+            y: KD,
+            type: 'histogram',
+          marker: {
+            color: '#C70039',
+            line: {
+              color:  "rgba(255, 100, 102, 1)",
+              width: 1
+            }
+          },
+          }
+        ];
+        let barLayout= {
+          title: 'Histogram of Wine Rating',
+          margin: {t:0},
+          hovermode: "closest",
+          xaxis: {title: 'Wine Ratings'},
+          yaxis: {title:'# of wines'},
+          margin: {t:30}
+        };
+        Plotly.newPlot('bar', data,barLayout);
   
   
     });
@@ -94,9 +116,9 @@ function visuals(sample){
 
   // function optionChanged(sample) {
   //   console.log(sample);
-  //   init(sample);
-  //   init1(sample);
-  //   
+  //   //init(sample);
+  //   buildMetadata(value);
+    
   // }
 
-  visuals();
+ visuals();

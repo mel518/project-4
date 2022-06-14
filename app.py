@@ -7,6 +7,9 @@ from matplotlib import projections
 from bson import json_util
 from flask_cors import CORS
 import sys
+import simplejson
+
+
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -29,7 +32,6 @@ def fighters():
     
     return jsonify(list_cur[0]["fighter_dropdown"])
 
-
 @app.route("/combined")
 def combined():
     data = mongo.db.Combined_Fighter.find()
@@ -42,8 +44,11 @@ def combined():
 def select(fighter):
     data =mongo.db.Combined_Fighter.find({'fighter':fighter},{'_id': 0,'date': 1,'avg_KD':1,'avg_TOTAL_STatt':1,'avg_TOTAL_STlanded':1})
     list_cur = list(data)
-    return jsonify(list_cur)
+    return simplejson.dumps(list_cur, ignore_nan=True)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+ # Successfully installed simplejson-3.17.6
