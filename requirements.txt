@@ -25,3 +25,4 @@ Werkzeug==2.1.2
 zipp==3.8.0
 joblib==1.1.0
 simplejson==3.17.6
+pandas==1.16.0
