@@ -1,9 +1,3 @@
-// d3.select("#selDataset").on('change',function(){
-//     const value = d3.select(this).value
-//     visuals4(value)
-// })
-
-
 function visuals3(fighter) {
     console.log('fighter', fighter)
     d3.json(`http://127.0.0.1:5000/fighter_stats/${fighter}`).then(data => {
@@ -17,6 +11,7 @@ function visuals3(fighter) {
     data.forEach(buy => 
         Object.entries(buy).map((lable)=> `${lable}`).forEach(item => 
             displayinfo.append('panel-body').text(item).append('br')))
+            console.log(buy)
     
     });
 

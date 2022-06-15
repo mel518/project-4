@@ -1,9 +1,3 @@
-// 'https://ufcmatchdata.herokuapp.com/recent_matches'
-// 'https://ufcmatchdata.herokuapp.com/combined/${fighter}'
-
-
-
-
 function visuals(fighter){
  
   console.log('fighter' , fighter)
