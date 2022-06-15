@@ -39,7 +39,7 @@ function init() {
     //this is works because of Closure and Scope (Unique)
     // Start at wine option 0
     var result = data[0];
-    visuals(result)
+    // visuals(result)
 
     // // for (let i = 0; i<data.length; i++){
     // // console.log(data.country);
