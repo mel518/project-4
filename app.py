@@ -61,6 +61,7 @@ def home():
     json_data = jsonify(json_util.dumps(list_cur))
     return json_data
 
+# test fighters
 @app.route("/fighters")
 def fighters():
     data = mongo.db.fighters.find({},{'_id':False})

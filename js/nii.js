@@ -1,7 +1,7 @@
 function visuals(fighter){
  
   console.log('fighter' , fighter)
-  d3.json(`http://127.0.0.1:5000/combined/${fighter}`).then( data => {
+  d3.json(`https://ufcmatchdata.herokuapp.com/combined/${fighter}`).then( data => {
     
     let combined_data=data;
     console.log(data);
@@ -95,7 +95,7 @@ function visuals(fighter){
   function visuals2(fighterr){
     //const visuals = d3.select("#selDataset").node().value;
     console.log('fighter' , fighterr)
-    d3.json(`http://127.0.0.1:5000/combined/${fighterr}`).then( data => {
+    d3.json(`https://ufcmatchdata.herokuapp.com/combined/${fighterr}`).then( data => {
       // var combined_data = JSON.parse(data)
       let combined_data=data;
       console.log(data);

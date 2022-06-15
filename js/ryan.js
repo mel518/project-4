@@ -1,6 +1,6 @@
 function visuals3(fighter) {
     console.log('fighter', fighter)
-    d3.json(`http://127.0.0.1:5000/fighter_stats/${fighter}`).then(data => {
+    d3.json(`https://ufcmatchdata.herokuapp.com/fighter_stats/${fighter}`).then(data => {
         console.log('blue data')
         console.log(data)
 
@@ -18,7 +18,7 @@ function visuals3(fighter) {
 
 function visuals4(fighterr) {
     console.log('fighter', fighterr)
-    d3.json(`http://127.0.0.1:5000/fighter_stats/${fighterr}`).then(data => {
+    d3.json(`https://ufcmatchdata.herokuapp.com/fighter_stats/${fighterr}`).then(data => {
         console.log('red data')
         console.log(data)
 
