@@ -88,7 +88,7 @@ def stats():
 
 @app.route("/fighter_stats/<fighter>")
 def player(fighter):
-    data =mongo.db.recent_matches.find({'fighter':fighter},{'_id': 0, 'Stance': 1, 'Height_cms': 1, 'Reach_cms': 1, 'wins': 1, 'losses': 1,'weight_class': 1})
+    data =mongo.db.recent_matches.find({'fighter':fighter},{'_id': 0, 'Stance': 1, 'Height_cms': 1, 'Reach_cms': 1, 'wins': 1, 'losses': 1})
     list_cur = list(data)
     return simplejson.dumps(list_cur, ignore_nan=True)
 
