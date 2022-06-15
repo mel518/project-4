@@ -11406,6 +11406,7 @@ p {
   }
 }
 header.masthead {
+  text-shadow: 6px 6px 20px #000000;
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
@@ -11414,7 +11415,7 @@ header.masthead {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
-  background-size: cover;
+  background-size: cover
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;

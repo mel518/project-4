@@ -29,6 +29,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Athlete Stats</a></li> <!-- originally Portfolio-->
+                        <li class="nav-item"><a class="nav-link" href="#ranking">Ranking</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -39,9 +40,9 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome To Our Page!</div>
-                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Let's Get These Stats!</a>
+                <div class="masthead-subheading">Want to Explore UFC Stats to Place Bets Intelligently?</div>
+                <div class="masthead-heading text-uppercase">Knock Yourself Out!</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#portfolio">Let's Get These Stats!</a>
             </div>
         </header>
 
@@ -51,8 +52,8 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">A team of eclectic experiences in driving impactful statistical analysis utilizing machine learning to derive results
-                        <br/>
+                    <h3 class="section-subheading text-muted">A team of eclectic experiences in driving impactful statistical analysis utilizing machine learning to derive results.
+                        <br/> <br/>
                         BELOW: Example case study of Sport's analytics using past fights to dictate higher win percentage. Includes web-scrapping of the UFC website to bring current stat's of fighters</h3>
                 </div>
                 <div class="row text-center">
@@ -70,7 +71,7 @@
                             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">Technical Proficiency</h4>
-                        <p class="text-muted">Java Script, Database creation (Mongo Atlas), Python, HTML, and CSS</p>
+                        <p class="text-muted">Java Script, Database creation (Mongo Atlas), Heroku, Python (& Pandas), HTML, and CSS</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
@@ -83,13 +84,14 @@
                 </div>
             </div>
         </section>
-        <!-- Portfolio Grid-->
+
+        <!-- Athlete Stats Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
 
                     <h2 class="section-heading text-uppercase">Athlete Stats</h2> <!-- originally Portfolio-->
-                    <h3 class="section-subheading text-muted">Pick two athletes to see their individual stats, and ---IDK WHAT TO WRITE-- and who is most likely to get their ass beat.</h3>
+                    <h3 class="section-subheading text-muted">Pick two athletes to get their stats, and a statiscal model that predicts who would win through previous fight stats.</h3>
                 </div>
 
                 <div class="row">
@@ -101,13 +103,16 @@
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                           </a>
                         </div>
-                        <div class="card-body">
-                          <select id="selDataset" onchange="optionChanged(this.value)"></select>    
-                          <h5 class="card-title">Athlete Name</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                        <div class="card-body">   
+                          <h5 class="card-title">Blue Corner</h5>
+                          <select id="selDataset" onchange="optionChanged(this.value)"></select> 
+                          <br/><br/>
+                          <p class="card-text"> Knock Downs by Year:
                           <div id="sample-metadata" class="panel-body"></div>
+                          <div id="bar"></div>
                           </p>
-                          <a href="https://www.ufc.com/rankings" class="btn btn-primary">Athlete UFC Page Stats</a>
+                          <button onclick="fighter1()" class="btn btn-primary"> Athlete UFC Page Stats</button>
+                          <!-- <a href="https://www.ufc.com/rankings" class="btn btn-primary">Athlete UFC Page Stats</a> -->
                         </div>
                       </div>
                     </div>
@@ -120,15 +125,19 @@
                           </a>
                         </div>
                         <div class="card-body">
-                          <select id="selDataset1" onchange="optionChanged(this.value)"></select>
-                          <h5 class="card-title">Athlete Name</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                          <h5 class="card-title">Red Corner</h5>
+                          <select id="selDataset1" onchange="optionsChanged(this.value)"></select>
+                          <br/><br/>
+                          <p class="card-text">Knock Downs by Year:
                           <div id="sample-metadata3" class="panel-body"></div>
+                          
                           </p>
-                          <a href="#" class="btn btn-primary">Athlete UFC Page Stats</a>
+                          <button onclick="fighter2()" class="btn btn-primary"> Athlete UFC Page Stats</button>
+                          <!-- <a href="#" class="btn btn-primary">Athlete UFC Page Stats</a> -->
                         </div>
                       </div>
                     </div>
+                    <!-- button to trigger model -->
                 </div>
 
 
@@ -138,14 +147,18 @@
                     <div class="card-body">
                       <h4 class="card-title">Fight Statistic Results</h4>
                       <br/>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <p class="card-text">A logistical regression model was trained with UFC matches from 1993 'til 2021.</p>
+                    </div>
+                    <div>
+                        <button onclick="predict()" class="btn btn-primary"> Predict the Winner of this Match with 70% accuracy! </button>
+                        <p id="results"></p>
                     </div>
                   </div>
 
                 <div class="text-center">
                     <br/><br/>
-                    <h2 class="section-heading text-uppercase">TOP FIGHTERS</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase" id="ranking">RANKING</h2>
+                    <h3 class="section-subheading text-muted">Current UFC Champion title holders. (Last updated 6/15/2022)</h3>
                 </div>
                   
 
@@ -157,11 +170,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/1_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Threads</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                                <div class="portfolio-caption-heading">Men's Pound-For-Pound</div>
+                                <div class="portfolio-caption-subheading text-muted">KAMARO USMAN</div>
                             </div>
                         </div>
                     </div>
@@ -172,11 +185,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/2_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Explore</div>
-                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
+                                <div class="portfolio-caption-heading">Men's Flyweight</div>
+                                <div class="portfolio-caption-subheading text-muted">DEIVESON FIGUEIREDO</div>
                             </div>
                         </div>
                     </div>
@@ -187,11 +200,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/3_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Finish</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
+                                <div class="portfolio-caption-heading">Men's Bantamweight</div>
+                                <div class="portfolio-caption-subheading text-muted">ALJAMAIN STERLING</div>
                             </div>
                         </div>
                     </div>
@@ -202,11 +215,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/5_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Lines</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
+                                <div class="portfolio-caption-heading">Women's Pound-For-Pound</div>
+                                <div class="portfolio-caption-subheading text-muted">VALENTINA SHEVCHENKO</div>
                             </div>
                         </div>
                     </div>
@@ -217,11 +230,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/5_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Southwest</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
+                                <div class="portfolio-caption-heading">Women's Flyweight</div>
+                                <div class="portfolio-caption-subheading text-muted">VALENTINA SHEVCHENKO</div>
                             </div>
                         </div>
                     </div>
@@ -232,11 +245,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/6_full.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Window</div>
-                                <div class="portfolio-caption-subheading text-muted">Photography</div>
+                                <div class="portfolio-caption-heading">Women's Bantamweight</div>
+                                <div class="portfolio-caption-subheading text-muted">JULIANNA PEÑA</div>
                             </div>
                         </div>
                     </div>
@@ -248,7 +261,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Where we got the data / Classifications / Data Modeling / Analysis</h3>
+                    <h3 class="section-subheading text-muted">Details of our steps from start to finish!</h3>
                 </div>
                 <ul class="timeline">
                     <li>
@@ -268,7 +281,7 @@
                                 <h4>Step 2</h4>
                                 <h4 class="subheading">Data Optimization</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">ETL process included data clean up, web scraping, bringing in latest fight stats, appending / removing irrelevent columns, reformating data for model creation.</p></div>
                         </div>
                     </li>
                     <li>
@@ -278,7 +291,7 @@
                                 <h4>Step 3</h4>
                                 <h4 class="subheading">Data Modeling</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">A test train model was used to classify previous fight data stats in order to predict probablistic outcomes.</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -288,7 +301,7 @@
                                 <h4>Step 4</h4>
                                 <h4 class="subheading">Execution</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">Through the use of Atlas Mongo and Heroku, we were able to create a server to visual the website and databases for our viewers.</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -310,7 +323,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">MEET THE TEAM!</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted"></h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -318,7 +331,7 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/ryan.jpg" alt="..." />
                             <h4>Ryan Tempone</h4>
                             <p class="text-muted">Retired UFC Fighter</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Ryanvt94" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
@@ -328,9 +341,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/ellen.jpg" alt="..." />
                             <h4>Ellen White</h4>
                             <p class="text-muted">Lead Mongo Guru</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/mel518" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/ellen-white-680a9519a/" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -338,9 +351,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/nii.jpg" alt="..." />
                             <h4>Immanuel Odateifio</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Nii-O" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/immanuel-odarteifio/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -348,9 +361,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/andrew.jpg" alt="..." />
                             <h4>Andrew Kim</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Adkim0321" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/andrew-analytics/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -358,9 +371,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/lizzy.jpg" alt="..." />
                             <h4>Lizzy Nguyen</h4>
                             <p class="text-muted">Web Manager</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/SimplyLizzy" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/elingu/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -368,9 +381,9 @@
                             <img class="mx-auto rounded-circle" src="assets/img/team/Mo.jpg" alt="..." />
                             <h4>Mohamed Hamza</h4>
                             <p class="text-muted">Honorary Member</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/mohamed-s-hamza/" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
@@ -448,9 +461,9 @@
                     <div class="d-none" id="submitSuccessMessage">
                         <div class="text-center text-white mb-3">
                             <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
+                            <!-- To activate this form, sign up at -->
                             <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            <!-- <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a> -->
                         </div>
                     </div>
                     <!-- Submit error message-->
@@ -491,23 +504,60 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">Kamaru Usman</h2>
+                                    <p class="item-intro text-muted">Welterweight Champion | 20-1-0 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1_head.png" alt="..." />
+                                    <p>Kamarudeen Usman (born May 11, 1987) is a Nigerian-American professional mixed martial artist, former freestyle wrestler and graduated folkstyle wrestler. 
+                                        He currently competes in the welterweight division of the Ultimate Fighting Championship (UFC), where he is the current UFC Welterweight Champion. 
+                                        Usman was also The Ultimate Fighter 21 tournament winner. 
+                                        As of September 27, 2021, he is #1 in the UFC men's pound-for-pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Threads
+                                            <strong>Age:</strong>
+                                            35
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Illustration
+                                            <strong>Height:</strong>
+                                            72.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            169.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            76.00
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            41.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            Auchi, Nigeria
+                                        </li>
+                                        <li>
+                                            <strong>Trains At:</strong>
+                                            Blackzilians - Boca Raton, FL
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Freestyle
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close 
                                     </button>
                                 </div>
                             </div>
@@ -526,23 +576,60 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">DEIVESON FIGUEIREDO</h2>
+                                    <p class="item-intro text-muted">Flyweight Champion | 21-2-1 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2_head.png" alt="..." />
+                                    <p> 
+                                        Deiveson Alcântara Figueiredo (born December 18, 1987) is a Brazilian professional mixed martial artist. 
+                                        He currently competes in the Flyweight division of the Ultimate Fighting Championship (UFC), where he is the two-time and current UFC Flyweight Champion.
+                                        As of May 2, 2022 he is #11 in the UFC men's pound-for-pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Explore
+                                            <strong>Age:</strong>
+                                            34
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Graphic Design
+                                            <strong>Height:</strong>
+                                            65.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            125.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            68.00
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            38.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            Soure, Brazil
+                                        </li>
+                                        <li>
+                                            <strong>Trains At:</strong>
+                                            Team Figueiredo
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Boxing
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -561,23 +648,60 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">ALJAMAIN STERLING</h2>
+                                    <p class="item-intro text-muted">Bantamweight Champion | 21-3-0 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3_head.png" alt="..." />
+                                    <p>Aljamain Antoine Sterling (born July 31, 1989) is an American mixed martial artist. 
+                                        He currently competes in the Bantamweight division in the Ultimate Fighting Championship (UFC), where he is the current UFC Bantamweight Champion. 
+                                        Aljamain also competed for Cage Fury Fighting Championship, where he is the former Cage Fury Fighting Championship Bantamweight Champion. 
+                                        As of May 9, 2022 he is #9 in the UFC men's pound-for-pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Finish
+                                            <strong>Age:</strong>
+                                            32
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Identity
+                                            <strong>Height:</strong>
+                                            67.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            134.50
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            71.00
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            39.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            United States
+                                        </li>
+                                        <li>
+                                            <strong>Trains At:</strong>
+                                            Serra-Longo Long Island, NY
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Kickboxer
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -596,23 +720,56 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/4.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">VALENTINA SHEVCHENKO</h2>
+                                    <p class="item-intro text-muted">Women's Flyweight Champion | 22-3-0 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5_head.png" alt="..." />
+                                    <p>Valentina Anatolievna Shevchenko (Russian: Валентина Анатольевна Шевченко; born March 7, 1988) is a Kyrgyzstani-Peruvian professional mixed martial artist and former Muay Thai fighter. 
+                                        She competes in the women's Flyweight division for the Ultimate Fighting Championship (UFC), where she is the current UFC Women's Flyweight Champion. 
+                                        Shevchenko became champion at UFC 231 after defeating Joanna Jędrzejczyk. 
+                                        As of December 13, 2021, she is ranked #1 in UFC women's pound-for-pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Lines
+                                            <strong>Age:</strong>
+                                            33
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Branding
+                                            <strong>Height:</strong>
+                                            65.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            125.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            66.50
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            38.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            Bishkek, Kyrgyzstan
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Muay Thai
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -631,23 +788,56 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">VALENTINA SHEVCHENKO</h2>
+                                    <p class="item-intro text-muted">Women's Flyweight Champion | 22-3-0 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5_head.png" alt="..." />
+                                    <p>Valentina Anatolievna Shevchenko (Russian: Валентина Анатольевна Шевченко; born March 7, 1988) is a Kyrgyzstani-Peruvian professional mixed martial artist and former Muay Thai fighter. 
+                                        She competes in the women's Flyweight division for the Ultimate Fighting Championship (UFC), where she is the current UFC Women's Flyweight Champion. 
+                                        Shevchenko became champion at UFC 231 after defeating Joanna Jędrzejczyk. 
+                                        As of December 13, 2021, she is ranked #1 in UFC women's pound-for-pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Southwest
+                                            <strong>Age:</strong>
+                                            33
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Website Design
+                                            <strong>Height:</strong>
+                                            65.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            125.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            66.50
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            38.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            Bishkek, Kyrgyzstan
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Muay Thai
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li> 
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -666,23 +856,59 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase">JULIANNA PEÑA</h2>
+                                    <p class="item-intro text-muted">Women's Bantamweight Champion | 12-4-0 (W-L-D)</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6_head.png" alt="..." />
+                                    <p>Julianna Nicole Peña (born August 19, 1989) is an American professional mixed martial artist who competes in the bantamweight division of the Ultimate Fighting Championship, where she is the current UFC Women's Bantamweight Champion. 
+                                        Peña is the first woman to win The Ultimate Fighter. 
+                                        As of May 9, 2022 she is #3 in the UFC women's pound for pound rankings.
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Window
+                                            <strong>Age:</strong>
+                                            32
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Photography
+                                            <strong>Height:</strong>
+                                            66.00
                                         </li>
+                                        <li>
+                                            <strong>Weight:</strong>
+                                            135.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Reach:</strong>
+                                            69.00
+                                        </li>
+                                        <li>
+                                            <strong>Leg Reach:</strong>
+                                            39.00
+                                        </li>
+                                        <br/>
+                                        <li>
+                                            <strong>Status:</strong>
+                                            Active
+                                        </li>
+                                        <li>
+                                            <strong>Hometown:</strong>
+                                            Spokane, United States
+                                        </li>
+                                        <li>
+                                            <strong>Trains At:</strong>
+                                            Sik-Jitsu Spokane, WA
+                                        </li>
+                                        <li>
+                                            <strong>Fighting Style:</strong>
+                                            Jiu Jitsu
+                                        </li>
+                                        <br/>
+                                        <li>ⒸUFC & ⒸWikipedia
+                                        </li>   
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -696,11 +922,12 @@
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+       
         <!-- JS Files -->
-        <script src="js/andrewapp.js"></script>
-        <script src="js/ryan.js"></script>
         <script src="js/nii.js"></script>
-
+        <script src="js/ryan.js"></script>
+        <script src="js/andrewapp.js"></script>
+        
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

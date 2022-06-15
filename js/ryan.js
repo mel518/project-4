@@ -1,39 +1,43 @@
-function init(sample) {
-    d3.json(`https://ufcmatchdata.herokuapp.com/fighter_stats`).then(data => {
-        console.log('top data')
+// d3.select("#selDataset").on('change',function(){
+//     const value = d3.select(this).value
+//     visuals4(value)
+// })
+
+
+function visuals3(fighter) {
+    console.log('fighter', fighter)
+    d3.json(`http://127.0.0.1:5000/fighter_stats/${fighter}`).then(data => {
+        console.log('blue data')
         console.log(data)
 
-    let result = data;
-    console.log(result)
-
-    // read the data through JSON.parse()
-    fighters = JSON.parse(result);
-    console.log(fighters)
-
-    // sort the data by date
-    // let mxDate = fighters.sort(function(a,b) {
-    //     return a > b ? a : b;
-    // });
-    // console.log(mxDate)
-
     // display the data
-    let displayinfo = d3.select('#selDataset');
+    let displayinfo = d3.select('#sample-metadata');
     displayinfo.html('');
-    Object.entries(fighters[0]).forEach(k => {
-        console.log(k)
-        displayinfo.append('option').text(k[0] + ':' + k[1]).append('br')
-    });
 
-    // display the data
-    let displayinfo2 = d3.select('#selDataset1');
-    displayinfo.html('');
-    Object.entries(fighters[0]).forEach(k => {
-        console.log(k)
-        displayinfo2.append('option').text(k[0] + ':' + k[1]).append('br')
-    });
-
+    data.forEach(buy => 
+        Object.entries(buy).map((lable)=> `${lable}`).forEach(item => 
+            displayinfo.append('panel-body').text(item).append('br')))
+    
     });
 
 }
 
-init();
+function visuals4(fighterr) {
+    console.log('fighter', fighterr)
+    d3.json(`http://127.0.0.1:5000/fighter_stats/${fighterr}`).then(data => {
+        console.log('red data')
+        console.log(data)
+
+    // display the data
+    let displayinfo2 = d3.select('#sample-metadata3');
+    displayinfo2.html('');
+
+    data.forEach(buy => 
+        Object.entries(buy).map((lable)=> `${lable}`).forEach(item => 
+            displayinfo2.append('panel-body').text(item).append('br')))
+    
+    });
+
+}
+
+visuals3();
