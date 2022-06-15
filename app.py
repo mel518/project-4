@@ -16,6 +16,7 @@ import joblib
 from sklearn.metrics import accuracy_score
 import simplejson
 
+
 # Create an instance of Flask
 app = Flask(__name__)
 CORS(app)
@@ -84,6 +85,12 @@ def stats():
     data = mongo.db.recent_matches.find({}, {'_id': 0})
     list_cur = list(data)
     return jsonify(list_cur)
+
+@app.route("/fighter_stats/<fighter>")
+def player(fighter):
+    data =mongo.db.recent_matches.find({'fighter':fighter},{'_id': 0, 'Stance': 1, 'Height_cms': 1, 'Reach_cms': 1, 'wins': 1, 'losses': 1})
+    list_cur = list(data)
+    return simplejson.dumps(list_cur, ignore_nan=True)
 
 @app.route("/recent_matches")
 def recent():

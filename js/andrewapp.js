@@ -83,6 +83,19 @@ function fighter2() {
     }
   })
 }
+function optionChanged(fighter) {
+  init(fighter);
+  visuals(fighter);
+  visuals3(fighter);
+  
+}
+
+function optionsChanged(fighterr) {
+  init(fighterr);
+  visuals2(fighterr);
+  visuals4(fighterr);
+  
+}
 // Initialize the code
 init();
 
