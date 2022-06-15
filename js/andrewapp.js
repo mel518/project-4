@@ -1,5 +1,5 @@
 function init() {
-  d3.json("https://ufcmatchdata.herokuapp.com/fighters").then(data => {
+  d3.json("http://127.0.0.1:5000/fighters").then(data => {
     // Drop down menu creation
     let dropdownMenu = d3.select("#selDataset");
     data.forEach((uniqueVarietyList) => {
@@ -9,15 +9,10 @@ function init() {
     data.forEach((uniqueVarietyList) => {
       dropdownMenu2.append('option').text(uniqueVarietyList)
     })
-    //this is works because of Closure and Scope (Unique)
-    // Start at wine option 0
+    
+    // Start at fighter option 0
     var result = data[0];
-    visuals(result)
-    // buildMetadata(result)
-    // // for (let i = 0; i<data.length; i++){
-    // // console.log(data.country);
-    //   var result = data[0].variety;
-    // winelist(wineVariety);
+    
   });
 
 }
@@ -29,7 +24,7 @@ function fighter1() {
 
   const fighter1 = d3.select("#selDataset").node().value;
 
-  d3.json(`https://ufcmatchdata.herokuapp.com/ufc`).then(data => {
+  d3.json(`http://127.0.0.1:5000//ufc`).then(data => {
     data = JSON.parse(data)
     console.log(data)
     playerwebsite = data.filter(player => player.fighters === fighter1)[0]?.webpage
@@ -39,7 +34,7 @@ function fighter1() {
       alert("fighter does not exist")
     }
     // add listner (this is in the html)
-    visuals(fighter1)
+    // visuals(fighter1)
     // window.open(data[0].webpage, "_blank");
   })
 }
@@ -48,7 +43,7 @@ function fighter2() {
 
   const fighter2 = d3.select("#selDataset1").node().value;
 
-  d3.json(`https://ufcmatchdata.herokuapp.com/ufc`).then(data => {
+  d3.json(`http://127.0.0.1:5000//ufc`).then(data => {
     data = JSON.parse(data)
     console.log(data)
     playerwebsite = data.filter(player => player.fighters === fighter2)[0]?.webpage
@@ -59,5 +54,19 @@ function fighter2() {
     }
   })
 }
+
+
+function optionChanged(fighter) {
+  init(fighter);
+  visuals(fighter);
+  
+}
+
+function optionsChanged(fighterr) {
+  init(fighterr);
+  visuals2(fighterr);
+  
+}
+
 // Initialize the code
 init();
