@@ -29,7 +29,7 @@ model = joblib.load('fighter_classifier.h5')
 def index():
     return render_template('index.html')
     
-@app.route('/predict', methods =['POST'])
+@app.route("/predict", methods =['POST'])
 def predict():
     data = request.get_json() 
     fighter1_name = data.get("fighter1")
